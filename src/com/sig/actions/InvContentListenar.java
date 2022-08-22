@@ -1,36 +1,36 @@
-package com.sig.actions;
 
-import com.sig.format.InvCol;
-import com.sig.format.InvRows;
-import com.sig.format.InvRowsTbMod;
-import com.sig.design.InvDesign;
+package com.sig.controller;
+
+import com.sig.model.InvoiceHeader;
+import com.sig.model.InvoiceLine;
+import com.sig.model.InvoiceLineTableModel;
+import com.sig.view.InvoiceFrame;
 import java.util.ArrayList;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+public class TableSelectionListener implements ListSelectionListener {
 
-public class InvContentListenar implements ListSelectionListener {
+    private InvoiceFrame frame;
 
-    private InvDesign Design;
-
-    public InvContentListenar(InvDesign Design) {
-        this.Design = Design;
+    public TableSelectionListener(InvoiceFrame frame) {
+        this.frame = frame;
     }
 
     @Override
     public void valueChanged(ListSelectionEvent e) {
-        int selectedInvIndex = Design.getInvHTbl().getSelectedRow();
+        int selectedInvIndex = frame.getInvHTbl().getSelectedRow();
         System.out.println("Invoice selected: " + selectedInvIndex);
         if (selectedInvIndex != -1) {
-            InvCol ChooseInvoice = Design.getInvoicesArray().get(selectedInvIndex);
-            ArrayList<InvRows> ls = ChooseInvoice.getLs();
-            InvRowsTbMod rowsTbMod = new InvRowsTbMod(ls);
-            Design.setLinesArray(ls);
-            Design.getInvLTbl().setModel(rowsTbMod);
-            Design.getCustNameLbl().setText(ChooseInvoice.getCustNm());
-            Design.getInvNumLbl().setText("" + ChooseInvoice.getNm());
-            Design.getInvTotalIbl().setText("" + ChooseInvoice.getInvCount());
-            Design.getInvDateLbl().setText(InvDesign.dF.format(ChooseInvoice.getInvDate()));
+            InvoiceHeader selectedInv = frame.getInvoicesArray().get(selectedInvIndex);
+            ArrayList<InvoiceLine> lines = selectedInv.getLines();
+            InvoiceLineTableModel lineTableModel = new InvoiceLineTableModel(lines);
+            frame.setLinesArray(lines);
+            frame.getInvLTbl().setModel(lineTableModel);
+            frame.getCustNameLbl().setText(selectedInv.getCustomer());
+            frame.getInvNumLbl().setText("" + selectedInv.getNum());
+            frame.getInvTotalIbl().setText("" + selectedInv.getInvoiceTotal());
+            frame.getInvDateLbl().setText(InvoiceFrame.dateFormat.format(selectedInv.getInvDate()));
         }
     }
 
