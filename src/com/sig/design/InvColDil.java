@@ -1,5 +1,5 @@
 
-package com.sig.design;
+package com.sig.view;
 
 import java.awt.GridLayout;
 import javax.swing.JButton;
@@ -7,46 +7,47 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-public class InvColDil extends JDialog {
-    private JTextField cNm;
-    private JTextField invoiceD;
-    private JLabel cNmLable;
-    private JLabel invoiceDLable;
-    private JButton ConfirmBt;
-    private JButton DiscardBt;
 
-    public InvColDil(InvDesign Design) {
-        cNmLable = new JLabel("Client Nm:");
-        cNm = new JTextField(20);
-        invoiceDLable = new JLabel("InvD:");
-        invoiceD = new JTextField(20);
-        ConfirmBt = new JButton("Confirm");
-        DiscardBt = new JButton("discard");
+public class InvoiceHeaderDialog extends JDialog {
+    private JTextField custNameField;
+    private JTextField invDateField;
+    private JLabel custNameLbl;
+    private JLabel invDateLbl;
+    private JButton okBtn;
+    private JButton cancelBtn;
+
+    public InvoiceHeaderDialog(InvoiceFrame frame) {
+        custNameLbl = new JLabel("Customer Name:");
+        custNameField = new JTextField(20);
+        invDateLbl = new JLabel("Invoice Date:");
+        invDateField = new JTextField(20);
+        okBtn = new JButton("OK");
+        cancelBtn = new JButton("Cancel");
         
-        ConfirmBt.setActionCommand("New inv Confirm");
-        DiscardBt.setActionCommand("New inv Discard");
+        okBtn.setActionCommand("newInvoiceOK");
+        cancelBtn.setActionCommand("newInvoiceCancel");
         
-        ConfirmBt.addActionListener(Design.getActionListener());
-        DiscardBt.addActionListener(Design.getActionListener());
+        okBtn.addActionListener(frame.getActionListener());
+        cancelBtn.addActionListener(frame.getActionListener());
         setLayout(new GridLayout(3, 2));
         
-        add(invoiceDLable);
-        add(invoiceD);
-        add(cNmLable);
-        add(cNm);
-        add(ConfirmBt);
-        add(DiscardBt);
+        add(invDateLbl);
+        add(invDateField);
+        add(custNameLbl);
+        add(custNameField);
+        add(okBtn);
+        add(cancelBtn);
         
         pack();
         
     }
 
-    public JTextField getCNm() {
-        return cNm;
+    public JTextField getCustNameField() {
+        return custNameField;
     }
 
-    public JTextField getInvoiceD() {
-        return invoiceD;
+    public JTextField getInvDateField() {
+        return invDateField;
     }
     
 }
