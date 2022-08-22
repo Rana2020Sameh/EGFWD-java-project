@@ -1,68 +1,61 @@
 
-package com.sig.format;
+package com.sig.model;
 
-public class InvRows {
-     private InvCol col;
-    private String pice;
-    private double Fess;
-    private int quantity;
+public class InvoiceLine {
+    private String item;
+    private double price;
+    private int count;
+    private InvoiceHeader header;
 
-    public InvRows() {
+    public InvoiceLine() {
     }
 
-    public InvRows(InvCol col, String pice, double Fess, int quantity) {
-        this.col = col;
-        this.pice = pice;
-        this.Fess = Fess;
-        this.quantity = quantity;
+    public InvoiceLine(String item, double price, int count, InvoiceHeader header) {
+        this.item = item;
+        this.price = price;
+        this.count = count;
+        this.header = header;
     }
 
-    public InvRows(String select2, double Fee, int Number, InvCol invoice) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public InvoiceHeader getHeader() {
+        return header;
     }
 
-    public InvCol getCol() {
-        return col;
+    public void setHeader(InvoiceHeader header) {
+        this.header = header;
     }
 
-    public void setCol(InvCol col) {
-        this.col = col;
+    public String getItem() {
+        return item;
     }
 
-    public String getPice() {
-        return pice;
+    public void setItem(String item) {
+        this.item = item;
     }
 
-    public void setPice(String pice) {
-        this.pice = pice;
+    public double getPrice() {
+        return price;
     }
 
-    public double getFess() {
-        return Fess;
+    public void setPrice(double price) {
+        this.price = price;
     }
 
-    public void setFess(double Fess) {
-        this.Fess = Fess;
+    public int getCount() {
+        return count;
     }
 
-    public int getQuantity() {
-        return quantity;
+    public void setCount(int count) {
+        this.count = count;
     }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-
     
-    
-    public double getRowsCount() {
-        return Fess * quantity;
+    public double getLineTotal() {
+        return price * count;
     }
 
     @Override
     public String toString() {
-        return col.getNm() + "," + pice + "," + Fess + "," + quantity;
+        return header.getNum() + "," + item + "," + price + "," + count;
     }
 
     
