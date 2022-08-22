@@ -1,24 +1,24 @@
 
-package com.sig.format;
+package com.sig.model;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class InvCol {
-        private Date invDate;
-       private String custNm;
-       private int Nm;
-      private ArrayList<InvRows> ls;
-      private DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+public class InvoiceHeader {
+    private int num;
+    private String customer;
+    private Date invDate;
+    private ArrayList<InvoiceLine> lines;
+    private DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
 
-    public InvCol() {
+    public InvoiceHeader() {
     }
 
-    public InvCol(int Nm, String custNm, Date invDate) {
-        this.Nm = Nm;
-        this.custNm = custNm;
+    public InvoiceHeader(int num, String customer, Date invDate) {
+        this.num = num;
+        this.customer = customer;
         this.invDate = invDate;
     }
 
@@ -30,46 +30,46 @@ public class InvCol {
         this.invDate = invDate;
     }
 
-    public int getNm() {
-        return Nm;
+    public int getNum() {
+        return num;
     }
 
-    public void setNm(int Nm) {
-        this.Nm = Nm;
+    public void setNum(int num) {
+        this.num = num;
     }
 
-    public String getCustNm() {
-        return custNm;
+    public String getCustomer() {
+        return customer;
     }
 
-    public void setCustNm(String custNm) {
-        this.custNm = custNm;
+    public void setCustomer(String customer) {
+        this.customer = customer;
     }
 
-    public ArrayList<InvRows> getLs() {
-        if (ls == null) {
-            ls = new ArrayList<>();
+    public ArrayList<InvoiceLine> getLines() {
+        if (lines == null) {
+            lines = new ArrayList<>();
         }
-        return ls;
+        return lines;
     }
 
-    public void setLs(ArrayList<InvRows> ls) {
-        this.ls = ls;
+    public void setLines(ArrayList<InvoiceLine> lines) {
+        this.lines = lines;
     }
     
-    public double getInvCount() {
-        double count = 0.0;
+    public double getInvoiceTotal() {
+        double total = 0.0;
         
-        for (int i = 0; i < getLs().size(); i++) {
-            count += getLs().get(i).getRowsCount();
+        for (int i = 0; i < getLines().size(); i++) {
+            total += getLines().get(i).getLineTotal();
         }
         
-        return count;
+        return total;
     }
 
     @Override
     public String toString() {
-        return Nm + "," + df.format(invDate) + "," + custNm;
+        return num + "," + df.format(invDate) + "," + customer;
     }
     
 }
