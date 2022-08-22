@@ -1,60 +1,63 @@
-package com.sig.design;
+
+package com.sig.view;
+
 import java.awt.GridLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-public class InvRowDil extends JDialog{
-    private JTextField piceNm;
-    private JTextField piceQuantity;
-    private JTextField PicePr;
-    private JLabel PiceNmLable;
-    private JLabel piceQuantityLable;
-    private JLabel PicePrLable;
-    private JButton ConfirmBt;
-    private JButton DiscardBt;
+
+public class InvoiceLineDialog extends JDialog{
+    private JTextField itemNameField;
+    private JTextField itemCountField;
+    private JTextField itemPriceField;
+    private JLabel itemNameLbl;
+    private JLabel itemCountLbl;
+    private JLabel itemPriceLbl;
+    private JButton okBtn;
+    private JButton cancelBtn;
     
-    public InvRowDil(InvDesign Design) {
-        piceNm = new JTextField(20);
-        PiceNmLable = new JLabel("Pice Nm");
+    public InvoiceLineDialog(InvoiceFrame frame) {
+        itemNameField = new JTextField(20);
+        itemNameLbl = new JLabel("Item Name");
         
-        piceQuantity = new JTextField(20);
-        piceQuantityLable = new JLabel("Pice Quantity");
+        itemCountField = new JTextField(20);
+        itemCountLbl = new JLabel("Item Count");
         
-        PicePr = new JTextField(20);
-        PicePrLable = new JLabel("Pice Fees");
+        itemPriceField = new JTextField(20);
+        itemPriceLbl = new JLabel("Item Price");
         
-        ConfirmBt = new JButton("Confirm");
-        DiscardBt = new JButton("Discard");
+        okBtn = new JButton("OK");
+        cancelBtn = new JButton("Cancel");
         
-        ConfirmBt.setActionCommand("newRowConfirm");
-        DiscardBt.setActionCommand("newRowDiscard");
+        okBtn.setActionCommand("newLineOK");
+        cancelBtn.setActionCommand("newLineCancel");
         
-        ConfirmBt.addActionListener(Design.getActionListener());
-        DiscardBt.addActionListener(Design.getActionListener());
+        okBtn.addActionListener(frame.getActionListener());
+        cancelBtn.addActionListener(frame.getActionListener());
         setLayout(new GridLayout(4, 2));
         
-        add(PiceNmLable);
-        add(piceNm);
-        add(piceQuantityLable);
-        add(piceQuantity);
-        add(PicePrLable);
-        add(PicePr);
-        add(ConfirmBt);
-        add(DiscardBt);
+        add(itemNameLbl);
+        add(itemNameField);
+        add(itemCountLbl);
+        add(itemCountField);
+        add(itemPriceLbl);
+        add(itemPriceField);
+        add(okBtn);
+        add(cancelBtn);
         
         pack();
     }
 
-    public JTextField getPiceNm() {
-        return piceNm;
+    public JTextField getItemNameField() {
+        return itemNameField;
     }
 
-    public JTextField getpiceQuantity() {
-        return piceQuantity;
+    public JTextField getItemCountField() {
+        return itemCountField;
     }
 
-    public JTextField getPicePr() {
-        return PicePr;
+    public JTextField getItemPriceField() {
+        return itemPriceField;
     }
 }
