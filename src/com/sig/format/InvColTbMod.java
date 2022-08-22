@@ -1,41 +1,44 @@
-package com.sig.format;
-import com.sig.design.InvDesign;
+
+package com.sig.model;
+
+import com.sig.view.InvoiceFrame;
 import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
 
-public class InvColTbMod extends AbstractTableModel {
 
-    private ArrayList<InvCol> invSet;
-    private String[] Hed = {"InvNum", "InvDate", "CusNm", "InvQuantity"};
+public class InvoiceHeaderTableModel extends AbstractTableModel {
+
+    private ArrayList<InvoiceHeader> invoicesArray;
+    private String[] columns = {"Invoice Num", "Invoice Date", "Customer Name", "Invoice Total"};
     
-    public InvColTbMod(ArrayList<InvCol> invSet) {
-        this.invSet = invSet;
+    public InvoiceHeaderTableModel(ArrayList<InvoiceHeader> invoicesArray) {
+        this.invoicesArray = invoicesArray;
     }
 
     @Override
     public int getRowCount() {
-        return invSet.size();
+        return invoicesArray.size();
     }
 
     @Override
     public int getColumnCount() {
-        return Hed.length;
+        return columns.length;
     }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        InvCol inv = invSet.get(rowIndex);
+        InvoiceHeader inv = invoicesArray.get(rowIndex);
         switch (columnIndex) {
-            case 0: return inv.getNm();
-            case 1: return InvDesign.dF.format(inv.getInvDate());
-            case 2: return inv.getCustNm();
-            case 3: return inv.getInvCount();
+            case 0: return inv.getNum();
+            case 1: return InvoiceFrame.dateFormat.format(inv.getInvDate());
+            case 2: return inv.getCustomer();
+            case 3: return inv.getInvoiceTotal();
         }
         return "";
     }
 
     @Override
     public String getColumnName(int column) {
-        return Hed[column];
+        return columns[column];
     }
 }
