@@ -1,40 +1,44 @@
-package com.sig.format;
+
+package com.sig.model;
+
 import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
-public class InvRowsTbMod extends AbstractTableModel {
 
-    private ArrayList<InvRows> lsSet;
-    private String[] cLS = {"PiceName", "Price", "Quantity", "Row Fees"};
 
-    public InvRowsTbMod(ArrayList<InvRows> lsSet) {
-        this.lsSet = lsSet;
+public class InvoiceLineTableModel extends AbstractTableModel {
+
+    private ArrayList<InvoiceLine> linesArray;
+    private String[] columns = {"Item Name", "Unit Price", "Count", "Line Total"};
+
+    public InvoiceLineTableModel(ArrayList<InvoiceLine> linesArray) {
+        this.linesArray = linesArray;
     }
 
     @Override
     public int getRowCount() {
-        return lsSet == null ? 0 : lsSet.size();
+        return linesArray == null ? 0 : linesArray.size();
     }
 
     @Override
     public int getColumnCount() {
-        return cLS.length;
+        return columns.length;
     }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        if (lsSet == null) {
+        if (linesArray == null) {
             return "";
         } else {
-            InvRows line = lsSet.get(rowIndex);
+            InvoiceLine line = linesArray.get(rowIndex);
             switch (columnIndex) {
                 case 0:
-                    return line.getPice();
+                    return line.getItem();
                 case 1:
-                    return line.getFess();
+                    return line.getPrice();
                 case 2:
-                    return line.getQuantity();
+                    return line.getCount();
                 case 3:
-                    return line.getRowsCount();
+                    return line.getLineTotal();
                 default:
                     return "";
             }
@@ -43,7 +47,7 @@ public class InvRowsTbMod extends AbstractTableModel {
 
     @Override
     public String getColumnName(int column) {
-        return cLS[column];
+        return columns[column];
     }
 
 }
